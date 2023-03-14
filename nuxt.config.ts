@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const baseUrl = "/";
 export default defineNuxtConfig({
   app: {
     head: {
@@ -18,6 +19,11 @@ export default defineNuxtConfig({
           rel: "apple-touch-icon",
           type: "image/x-icon",
           href: "/icon-192.png"
+        },
+        {
+          id: "theme-link",
+          rel: "stylesheet",
+          href: baseUrl + "themes/lara-light-teal/theme.css"
         }
       ]
     }
