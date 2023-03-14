@@ -1,6 +1,10 @@
-# Nuxt 3 Minimal Starter using Eslint, Stylelint and PrimeVue
+# Nuxt 3 Starter Template using Eslint, Stylelint and PrimeVue
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+## Capture
+
+![Capture](https://raw.githubusercontent.com/jeverduzco/nuxt-starter-template/main/public/capture.jpeg)
 
 ## Setup
 
