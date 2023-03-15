@@ -11,7 +11,7 @@ import Toast from "primevue/toast";
 // import prime vue services
 import ToastService from "primevue/toastservice";
 // import language translation
-// import { lang } from "./lang"; // uncomment this line if you need language translation, the translation file is in the same folder and have spanish translation
+// import { lang } from "../../utils/lang"; // uncomment this line if you need language translation, the translation file is in the same folder and have spanish translation
 
 // export prime vue plugin
 export default defineNuxtPlugin((nuxtApp) => {
