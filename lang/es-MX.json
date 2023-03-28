@@ -1,0 +1,39 @@
+{
+    "layout": {
+        "application": "APLICACIÓN",
+        "dashboard": "Panel de control",
+        "bookmarks": "Marcadores",
+        "reports": "Informes",
+        "revenue": "Ingresos",
+        "view": "Ver",
+        "search": "Buscar",
+        "expenses": "Gastos",
+        "team": "Equipo",
+        "messages": "Mensajes",
+        "calendar": "Calendario",
+        "settings": "Configuración",
+        "external": "EXTERNOS",
+        "discord": "Discord",
+        "slack": "Slack",
+        "github": "Github",
+        "notifications": "Notificaciones",
+        "language": "Idioma",
+        "theme": "Tema"
+    },
+    "pageContent": {
+        "orders": "Pedidos",
+        "today": " hoy",
+        "new": "Nuevos",
+        "revenue": "Ingresos",
+        "moreThanYesterday": "más que ayer",
+        "customers": "Clientes",
+        "comments": "Comentarios",
+        "unread": " No leídos"
+    },
+    "pages": {
+        "index": {
+            "title": "Nuxt 3 - Plantilla de Inicio",
+            "description": "Esto es una plantilla de inicio con Nuxt 3 y PrimeVue + Eslint + Stylelint"
+        }
+    }
+}

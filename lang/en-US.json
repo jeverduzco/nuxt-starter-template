@@ -1,0 +1,39 @@
+{
+    "layout": {
+        "application": "APPLICATION",
+        "dashboard": "Dashboard",
+        "bookmarks": "Bookmarks",
+        "reports": "Reports",
+        "revenue": "Revenue",
+        "view": "View",
+        "search": "Search",
+        "expenses": "Expenses",
+        "team": "Team",
+        "messages": "Messages",
+        "calendar": "Calendar",
+        "settings": "Settings",
+        "external": "EXTERNAL",
+        "discord": "Discord",
+        "slack": "Slack",
+        "github": "Github",
+        "notifications": "Notifications",
+        "language": "Language",
+        "theme": "Theme"
+    },
+    "pageContent": {
+        "orders": "Orders",
+        "today": " today",
+        "new": "New",
+        "revenue": "Revenue",
+        "moreThanYesterday": "more than yesterday",
+        "customers": "Customers",
+        "comments": "Comments",
+        "unread": " Unread"
+    },
+    "pages": {
+        "index": {
+            "title": "Nuxt 3 - Starter Template",
+            "description": "This is a Nuxt 3 project with PrimeVue + Eslint + Stylelint"
+        }
+    }
+}

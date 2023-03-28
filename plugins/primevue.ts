@@ -8,10 +8,11 @@ import Ripple from "primevue/ripple";
 import BadgeDirective from "primevue/badgedirective";
 // import prime vue components
 import Toast from "primevue/toast";
+import Menu from "primevue/menu";
 // import prime vue services
 import ToastService from "primevue/toastservice";
 // import language translation
-// import { lang } from "../../utils/lang"; // uncomment this line if you need language translation, the translation file is in the same folder and have spanish translation
+// import { lang } from "~/utils/pmlang"; // uncomment this line if you need language translation, the translation file is in the same folder and have spanish translation
 
 // export prime vue plugin
 export default defineNuxtPlugin((nuxtApp) => {
@@ -29,5 +30,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive("badge", BadgeDirective);
   // load prime vue components
   nuxtApp.vueApp.component("Toast", Toast);
+  nuxtApp.vueApp.component("Menu", Menu);
   // other components that you need
 });

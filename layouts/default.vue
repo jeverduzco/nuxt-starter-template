@@ -1,6 +1,14 @@
 <script setup lang="ts">
-// import prime vue for fix directives
+// import types
 import { usePrimeVue } from "primevue/config";
+import { Locale } from "@/types/locale";
+// import locales to change prime vue locale
+import { es, en } from "~/utils/pmlang";
+// import prime vue for fix directives
+// import i18n composables
+const { locale, locales, setLocale } = useI18n({
+// eslint-disable-next-line no-unused-vars
+}) as unknown as { t: (message: string) => void, locale: Ref<string>; locales: Ref<Locale[]>, setLocale: (code: string) => void };
 // use as any for fix typescript error because usePrimeVue has missing types
 const $primevue = usePrimeVue() as any;
 defineExpose({
@@ -13,6 +21,37 @@ const changeTheme = () => {
   $primevue.changeTheme(activeTheme.value, activeTheme.value === "lara-light-teal" ? "lara-dark-teal" : "lara-light-teal", "theme-link", () => {});
   activeTheme.value = activeTheme.value === "lara-light-teal" ? "lara-dark-teal" : "lara-light-teal";
 };
+// list locales
+const availableLocales = computed(() => {
+  return locales.value
+    .filter(i => i.code !== locale.value)
+    .map(i => ({
+      label: i.name,
+      icon: "pi pi-language",
+      command: () => {
+        setLocale(i.code);
+      }
+    }));
+});
+// create menu ref
+const menu = ref();
+// create menu toggle function
+const toggleMenu = () => {
+  menu.value.toggle(event);
+};
+// watch locale change to change prime vue locale
+watch(locale, (value) => {
+  switch (value) {
+  case "es":
+    $primevue.config.locale = es;
+    break;
+  default:
+    $primevue.config.locale = en;
+    break;
+  // add more locales if you need
+  }
+});
+
 </script>
 <template>
   <div>
@@ -30,20 +69,20 @@ const changeTheme = () => {
                   v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup' }"
                   class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer border-2 border-transparent border-rounded p-ripple"
                 >
-                  <span class="font-medium">FAVORITES</span>
+                  <span class="font-medium">{{ $t('layout.application') }}</span>
                   <i class="pi pi-chevron-down" />
                 </div>
                 <ul class="list-none p-0 m-0 overflow-hidden">
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors text-indigo-500 p-ripple menu-item">
                       <i class="pi pi-home mr-2" />
-                      <span class="font-medium">Dashboard</span>
+                      <span class="font-medium">{{ $t('layout.dashboard') }}</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-bookmark mr-2 text-blue-500" />
-                      <span class="font-medium">Bookmarks</span>
+                      <span class="font-medium">{{ $t('layout.bookmarks') }}</span>
                     </a>
                   </li>
                   <li>
@@ -53,7 +92,7 @@ const changeTheme = () => {
                       class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item"
                     >
                       <i class="pi pi-chart-line mr-2 text-purple-500" />
-                      <span class="font-medium">Reports</span>
+                      <span class="font-medium">{{ $t('layout.reports') }}</span>
                       <i class="pi pi-chevron-down ml-auto" />
                     </a>
                     <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
@@ -64,20 +103,20 @@ const changeTheme = () => {
                           class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item"
                         >
                           <i class="pi pi-chart-line mr-2 text-purple-500" />
-                          <span class="font-medium">Revenue</span>
+                          <span class="font-medium">{{ $t('layout.revenue') }}</span>
                           <i class="pi pi-chevron-down ml-auto" />
                         </a>
                         <ul class="list-none py-0 pl-3 pr-0 m-0 hidden overflow-y-hidden transition-all transition-duration-400 transition-ease-in-out">
                           <li>
                             <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                               <i class="pi pi-table text-purple-500 mr-2" />
-                              <span class="font-medium">View</span>
+                              <span class="font-medium">{{ $t('layout.view') }}</span>
                             </a>
                           </li>
                           <li>
                             <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                               <i class="pi pi-search mr-2 text-purple-500" />
-                              <span class="font-medium">Search</span>
+                              <span class="font-medium">{{ $t('layout.search') }}</span>
                             </a>
                           </li>
                         </ul>
@@ -85,7 +124,7 @@ const changeTheme = () => {
                       <li>
                         <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                           <i class="pi pi-chart-line mr-2 text-purple-500" />
-                          <span class="font-medium">Expenses</span>
+                          <span class="font-medium">{{ $t('layout.expenses') }}</span>
                         </a>
                       </li>
                     </ul>
@@ -93,26 +132,26 @@ const changeTheme = () => {
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-users mr-2 text-green-500" />
-                      <span class="font-medium">Team</span>
+                      <span class="font-medium">{{ $t('layout.team') }}</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-comments mr-2 text-cyan-500 " />
-                      <span class="font-medium">Messages</span>
+                      <span class="font-medium">{{ $t('layout.messages') }}</span>
                       <span class="inline-flex align-items-center justify-content-center ml-auto bg-indigo-500 text-0 border-circle menu-badge">3</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-calendar mr-2 text-teal-500 " />
-                      <span class="font-medium">Calendar</span>
+                      <span class="font-medium">{{ $t('layout.calendar') }}</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 text-700 border-2 border-transparent hover:border-300 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-cog mr-2 text-pink-500 " />
-                      <span class="font-medium">Settings</span>
+                      <span class="font-medium">{{ $t('layout.settings') }}</span>
                     </a>
                   </li>
                 </ul>
@@ -125,26 +164,26 @@ const changeTheme = () => {
                   v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup'}"
                   class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
                 >
-                  <span class="font-medium">APPLICATIONS</span>
+                  <span class="font-medium">{{ $t('layout.external') }}</span>
                   <i class="pi pi-chevron-down" />
                 </div>
                 <ul class="list-none p-0 m-0 overflow-hidden">
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-discord mr-2 text-cyan-500" />
-                      <span class="font-medium">Discord</span>
+                      <span class="font-medium">{{ $t('layout.discord') }}</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-slack mr-2 text-purple-500" />
-                      <span class="font-medium">Slack</span>
+                      <span class="font-medium">{{ $t('layout.slack') }}</span>
                     </a>
                   </li>
                   <li>
                     <a v-ripple class="flex align-items-center cursor-pointer p-3 border-2 border-transparent hover:border-300 text-700 transition-duration-150 transition-colors p-ripple menu-item">
                       <i class="pi pi-github mr-2 text-blue-500" />
-                      <span class="font-medium">GitHub</span>
+                      <span class="font-medium">{{ $t('layout.github') }}</span>
                     </a>
                   </li>
                 </ul>
@@ -187,8 +226,20 @@ const changeTheme = () => {
                         transition-duration-150 transition-colors p-ripple"
               >
                 <i v-badge.danger class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0" />
-                <span class="block lg:hidden font-medium">Notifications</span>
+                <span class="block lg:hidden font-medium">{{ $t('layout.notifications') }}</span>
               </a>
+            </li>
+            <li>
+              <a
+                v-ripple
+                class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-200 font-medium border-round cursor-pointer
+                        transition-duration-150 transition-colors p-ripple"
+                @click="toggleMenu"
+              >
+                <i class="pi pi-language text-base lg:text-2xl mr-2 lg:mr-0" />
+                <span class="block lg:hidden font-medium">{{ $t('layout.language') }}</span>
+              </a>
+              <Menu id="overlay_menu" ref="menu" :model="availableLocales" :popup="true" />
             </li>
             <li>
               <a
@@ -198,7 +249,7 @@ const changeTheme = () => {
                 @click="changeTheme"
               >
                 <i class="pi text-base lg:text-2xl mr-2 lg:mr-0" :class="activeTheme === 'lara-light-teal' ? 'pi-moon' : 'pi-sun'" />
-                <span class="block lg:hidden font-medium">Theme</span>
+                <span class="block lg:hidden font-medium">{{ $t('layout.theme') }}</span>
               </a>
             </li>
           </ul>
@@ -238,3 +289,13 @@ const changeTheme = () => {
     max-height: calc(100vh - 60px);
   }
 </style>
+<i18n lang="json">
+  {
+    "en": {
+      "favorites": "FAVORITES"
+    },
+    "es": {
+      "favorites": "FAVORITOS"
+    }
+  }
+  </i18n>

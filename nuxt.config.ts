@@ -9,6 +9,7 @@ export default defineNuxtConfig({
       ],
       // <link rel="icon" type="shortcut icon" href="/icon-128.png">
       // <link rel="apple-touch-icon" type="image/x-icon" href="/icon-192.png">
+      // <link id="theme-link" rel="stylesheet" href="/themes/lara-light-teal/theme.css">
       link: [
         {
           rel: "icon",
@@ -35,6 +36,33 @@ export default defineNuxtConfig({
     "primeicons/primeicons.css",
     "primeflex/primeflex.css"
   ],
+  // modules
+  modules: [
+    "@nuxtjs/i18n"
+  ],
+  // i18n module configuration
+  i18n: {
+    locales: [
+      {
+        code: "es",
+        iso: "es-MX",
+        name: "Español",
+        file: "es-MX.json"
+      },
+      {
+        code: "en",
+        iso: "en-US",
+        name: "English",
+        file: "en-US.json"
+      }
+    ],
+    defaultLocale: "es",
+    strategy: "no_prefix",
+    langDir: "lang",
+    vueI18n: {
+      legacy: false
+    }
+  },
   // build settings
   build: {
     transpile: ["primevue"]

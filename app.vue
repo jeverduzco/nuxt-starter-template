@@ -1,6 +1,14 @@
+<script setup lang="ts">
+// impor i18n composables
+const head = useLocaleHead({
+  addDirAttribute: true,
+  identifierAttribute: "id",
+  addSeoAttributes: true
+});
+</script>
 <template>
   <div>
-    <Html lang="es-MX">
+    <Html :lang="head.htmlAttrs?.lang" :dir="head.htmlAttrs?.dir">
       <NuxtLayout>
         <NuxtPage />
         <AppNotifications />
