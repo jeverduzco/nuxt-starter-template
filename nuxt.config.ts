@@ -64,6 +64,16 @@ export default defineNuxtConfig({
       legacy: false
     }
   },
+  // vite-pwa module configuration
+  pwa: {
+    workbox: {
+      navigateFallback: null
+    },
+    manifest: {
+      name: "Nuxt 3 Template",
+      short_name: "Nuxt 3"
+    }
+  },
   // build settings
   build: {
     transpile: ["primevue"]
