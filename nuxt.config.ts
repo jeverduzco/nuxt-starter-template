@@ -38,7 +38,8 @@ export default defineNuxtConfig({
   ],
   // modules
   modules: [
-    "@nuxtjs/i18n"
+    "@nuxtjs/i18n",
+    "@vite-pwa/nuxt"
   ],
   // i18n module configuration
   i18n: {
