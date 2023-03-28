@@ -38,8 +38,8 @@ export default defineNuxtConfig({
   ],
   // modules
   modules: [
-    "@nuxtjs/i18n",
-    "@vite-pwa/nuxt"
+    "@nuxtjs/i18n"
+    // "@vite-pwa/nuxt"
   ],
   // i18n module configuration
   i18n: {
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
     }
   },
   // vite-pwa module configuration
-  pwa: {
+  /*   pwa: {
     workbox: {
       navigateFallback: null
     },
@@ -73,7 +73,7 @@ export default defineNuxtConfig({
       name: "Nuxt 3 Template",
       short_name: "Nuxt 3"
     }
-  },
+  }, */
   // build settings
   build: {
     transpile: ["primevue"]
